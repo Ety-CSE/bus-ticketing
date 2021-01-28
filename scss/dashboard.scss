@@ -1,0 +1,196 @@
+.admin-area{
+    h2.content-title {
+        font-size: 1.5em;
+        color: #0162a1;
+    }
+    .dashboard{
+        background: #fff;
+        padding-top: 15px;
+        border-bottom: 1px solid #e5e5e5;
+        border-right: 1px solid #e5e5e5;
+        border-left: 1px solid #e5e5e5;
+        .card{
+            border-radius: 0px;
+            background: lighten($black_m, 70);
+            border: 1px solid lighten($black_m, 68);
+            box-shadow: 1px 2px 3px lighten($black_m, 60);
+            cursor: pointer;
+            .card-body{
+                padding: 10px;
+                border-radius: 0px;
+            }
+        a:hover{
+            box-shadow: 1px 3px 5px $black_m !important;
+        }
+    
+    
+        }
+    
+        .dash{
+            .card-body{
+                color: lighten($black_m, 30) !important;
+                .card-title{
+                    font-size: 2em;
+                        color: $green;
+                }
+                .card-text{
+                    color: lighten($black_m, 30) !important;
+                    font-weight: 500;
+                    .right{
+                        float: right;
+                        text-align: right;
+                    }
+                    b{
+                        color: lighten($black_m, 30) !important;
+                    }
+                    .num{
+                        color: $green;
+                    }
+                }
+                .sub-title{
+                    font-weight: 500;
+                }
+            }
+            .icon{
+                i.fa{
+                    // color: lighten($black_m, 20) !important;
+                    margin-top: 5vh;
+                    font-size: 3.5em;
+                    color: $green;
+                }
+            }
+        }
+    } //dashboard
+
+}
+ 
+
+
+.hr{
+        border-bottom: 1px solid $white_d;
+    }
+label.includ{
+        font-size: .86em;
+        font-weight: 500;
+        color: lighten($color: $black_m, $amount: .20);
+    }
+
+
+.package{
+    .form-group{
+        margin-bottom: 0rem !important;
+       
+    }
+}
+
+.form-group{
+    b{
+        // border-bottom: 1px solid $white_m;
+        margin-bottom: 15px;
+    }
+}
+
+.input-group-text{
+    font-size: .7rem;
+}
+hr{
+    border-top: 1px solid  $white_m;
+}
+
+// #createDriver{
+//     color: $green;
+// }
+
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+    background-color:$green !important;
+    border-color: $green    !important;
+}
+
+.form-control:focus{
+    color:$black_m;
+    background-color: $white;
+    border-color: $green; 
+    outline: 0;
+    box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0.25);
+}
+
+
+.main_content_area{
+    background: $white_bg;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    .content-header{
+        padding-top: 15px;
+        padding-bottom: 15px;
+        background: $white;
+        border-bottom: 1px solid $white_l;
+        .content-title{
+            margin-top: 10px;
+            font-size: 1em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    }
+    .table-wrapper{
+        background: $white;
+        .dataTables_wrapper {
+            padding-top: 10px;
+            .row{
+                border-bottom: 1px solid $white_l;
+                table.dataTable{
+                    margin-top: 0 !important;
+                    margin-bottom: 15px !important;
+                    thead{
+                        th{
+                            border-bottom: 1px solid $white_l;
+                        }
+                    }
+                    tr{
+                        td{
+                            border-bottom: 1px solid $white_l;
+                        }
+                    }
+                }
+                .dataTables_paginate {
+                    padding-top: 10px;
+                    padding-bottom: 15px;
+                    .page-item.active .page-link{
+                        background-color: $green !important;
+                        border-color: $green !important;
+                        color: $white !important;
+                    }
+                    .page-link{
+                        color: $green !important;
+
+                    }
+                }
+                .dataTables_info {
+                    padding-top: 20px;
+                }
+            }
+        }
+    }
+}
+
+
+// bid_on
+
+.bid_on{
+    color:$green;
+    border:1px solid $green; 
+    border-radius:5px;padding:0 5px
+}
+
+
+button.remove.badge.badge-pill.badge-danger {
+    position: absolute;
+    left: -20px;
+    height: 25px;
+    border: 0;
+    width: 25px;
+}
+
+.st2{
+    cursor: pointer;
+}

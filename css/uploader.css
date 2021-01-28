@@ -1,0 +1,178 @@
+/*Upload Modal*/
+/*#uploadModal > .modal-contant> */
+.modal-header{
+	padding-bottom: 0px !important;
+}
+.media{
+	max-height: 450px;
+	overflow-y: scroll;
+}
+#media-home{
+	background:#fff !important; 
+	padding-top: 20px !important; 
+	margin-bottom: 80px !important; 
+	border:1px solid #e6e6e6 !important;
+}
+.media>.form-check{
+	padding-left: 0px;
+    padding: 1px !important;
+        margin-bottom: 10px;
+
+}
+.media>.form-check>.form-check-input{
+	
+    margin-left: -3px !important;
+    margin-top: -7px !important;
+}
+.media>.form-check>label:hover{
+	cursor: pointer;
+	border: 1px solid #e6e6e6; 
+	padding: 0px !important; 
+}
+
+.media>.form-check{
+  /*  padding-top: 1px !important;
+    padding-bottom: 1px !important; */
+}
+
+
+
+.media p{
+	text-align: center;
+	font-size: .9em;
+}
+
+
+/*checkBox*/
+
+/*** custom checkboxes ***/
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+.media>.form-checkinput[type=checkbox] {
+     position: relative;
+    font-family: FontAwesome;
+    display: none;
+}
+/* to hide the checkbox itself */
+.media>.form-check>input[type=checkbox]:before {
+    position: absolute;
+    background-color: #FFFFFF;
+    color: #7d7d7d;
+    height: 100%;
+	width: 100%;
+	font-size: 1.5em;
+    font-family: LineAwesome !important;
+    display: inline-block;
+    content:"\f2c4";
+    letter-spacing: 10px;
+    /*top: -7px;
+    left: -3px;*/
+}
+/* space between checkbox and label */
+.media>.form-check>input[type=checkbox]:checked:before {
+     font-family: LineAwesome !important;
+    display: inline-block;
+    content:"\f17e";
+    letter-spacing: 5px;
+    color: #464646;
+}
+/* allow space for check mark */
+
+
+/*.media>.form-check input[type="checkbox"]{
+  /*display:none;  */
+ /* position: relative;
+}
+.media>.form-check>input[type=checkbox]:before {
+    position: absolute;
+    background-color: #FFFFFF;
+    height: 100%;
+	width: 100%;
+    font-family: FontAwesome;
+    display: inline-block;
+    content:"\f096";
+    letter-spacing: 10px;
+}*/
+/*.media>.form-check input[type="checkbox"]:checked +label.fa{
+    background: #fff;
+}
+.media>.form-check input[type="checkbox"] + label.fa:before {
+     display:inline-block;
+     content: "\f096";
+     cursor:pointer;
+}
+
+.media>.form-check input[type="checkbox"]:checked +label.fa:before{
+    content:"\f046";
+    position: relative;
+    left: 2px;
+}*/
+
+
+/*====================================*/
+
+.modal-header>.nav{
+	margin-bottom: 0px !important;
+}
+.upload-console{
+	background-color: #fefefe;
+	border:2px solid #eee;
+	padding: 20px;
+}
+
+.upload-console-header{
+	padding: 0 0 20px 0;
+	margin: 0 0 20px 0;
+	border-bottom: 2px solid #eee;
+}
+.upload-console-drop{
+	height: 200px;
+	border: 2px dashed #ccc;
+	line-height: 200px;
+	color: #ccc;
+	text-align: center;
+	margin-bottom: 30px;
+}
+.upload-console-drop.drop{
+	border-color: #5bc0de;
+	color: #5bc0de;
+}
+
+.upload-console-body{
+	margin-bottom: 20px;
+}
+.bar{
+width: 100%;
+background-color: #eee;
+padding: 3px;
+border-radius: 3px;
+box-shadow: inset 0 1px 3px rbga(0,0,0, .2);
+box-sizing:border-box;
+margin-bottom: 20px;
+}
+.bar-fill{
+	height: 30px;
+	display: block;
+	background-color: cornflowerblue;
+	border-radius: 3px;
+	width: 0px;
+	-transition:width 0.8s ease;
+	-webkit-transition:width 0.8s ease;
+}
+.bar-fill-text{
+	color: #fff;
+	line-height:30px;
+	margin-left: 20px;
+}
+
+.upload-console-upload{
+	border-bottom: 2px solid #ccc;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+}
+.upload-console-upload span{
+	float: right;
+}
+
+.hidden{
+	display: none;
+}

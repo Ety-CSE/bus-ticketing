@@ -1,0 +1,141 @@
+.rentacar{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    a, a:hover{
+        color: $black_d;
+    }
+    a:hover{
+        box-shadow: $white_d 1px 3px 7px;
+    }
+}
+
+.profile_wrapper{
+    .c_photo{
+        background-size:cover !important; 
+        height:250px
+    }
+    .card{
+        padding: 20px 30px;
+        .logo{
+            background-size:cover !important; 
+            height:150px;
+            width:150px;
+            border-radius: 100px;
+            margin: 25px auto;
+            border: 1px solid $white_m ;
+        }
+    }
+    .card-offer{
+        p{
+            margin-bottom: 0px;
+        }
+    }
+}
+
+.offer_wrapper{
+    .r_profile{
+        .col-2{
+            max-width: 9% !important;
+            padding-right: 0px !important;
+            img{
+                border:1px solid $white_m;
+            }
+        }
+        .col-10{
+            p{
+                margin-bottom: 0px;
+            }
+        }
+        .offer-title{
+            margin-bottom: 15px;
+        }
+    }
+    .package_wrapper{
+        .nav{
+            .nav-item{
+                .nav-link{
+                    border:1px solid $white_l; 
+                    border-radius: 0px;
+                    padding: 15px;
+                }
+                .active{
+                    border-bottom: 2px solid $green;
+                }
+            }
+        }
+        .tab-content{
+            padding:15px; 
+            border:1px solid #e6e6e6;
+            border-top:0px;
+            .tab-pane{
+                hr{
+                    margin-top:5px;
+                }
+            }
+        }
+        
+    }
+    .review_wrapper{
+        .progress{
+            .progress-bar{
+                background-color: $green;
+            }
+        }
+    }
+}
+
+.includes{
+    b{
+        color: $black_l;
+    }
+    i{
+        font-size: 1.3em;
+        color: $green;
+    }
+}
+
+.green{
+    color: $green;
+}
+.order_wrapper{
+    .nav-steps{
+        margin-top: 50px;
+        margin-bottom: 50px;
+        border-bottom: 1px solid $white_m;
+        li{
+            padding-bottom: 30px;
+            color: $white_d;
+            span.step{
+                color:$white;
+                background: $white_d;
+                font-weight: bold;
+                padding:5px 10px;
+                border-radius: 15px;
+                margin-right: 10px;
+            }
+            .next{
+                margin-left: 50px;
+            }
+            span.aro{
+                margin-left: 50px;
+                color: $black_m;
+            }
+        }
+        li.active{
+            color: $black_m;
+            span.step{
+                color:$white;
+                background: $green;
+            }
+        }
+    }
+    h3{
+        margin-bottom: 30px;
+    }
+}
+
+
+
+i.fa-star{
+    color: $gold;
+}

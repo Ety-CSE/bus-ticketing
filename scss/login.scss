@@ -1,0 +1,62 @@
+// Login Page Style
+
+.loginWrapper{
+    margin-top: 150px;
+    h3{
+        font-size: 1.3em;
+    }
+    .hr-mid{
+        margin-top: -30px;
+        span{
+            background: white;
+            padding: 10px;
+        }
+    }
+    .btn{
+        font-size: 1em;
+    }
+    form{
+        a{
+            font-size: .87em;
+            color: #7e7e7e;
+        }
+        a.createAccount{
+            color: #fff;
+        }
+        a:hover{
+            color: $green;
+            text-decoration: none;
+        }
+        a.createAccount:hover{
+            color: #fff;
+        }
+        .form-group{
+            margin-bottom: 10px !important;
+            i{
+                color: $green;
+            }
+            .form-control:focus{
+                box-shadow: none;
+            }
+            .form-control{
+                font-size: .9em;
+                padding: 10px;
+                font-weight: 300;
+                // font-style: italic;
+                // border: 1px solid $green;
+            }
+            button.btn-success{
+                background-color: $green;
+                border: 1px solid $green;
+                font-size: 1em;
+                padding-left: 20px;
+                padding-right: 20px;
+                font-weight: 300;
+            }
+            .btn-success:focus, .btn-success.focus{
+                box-shadow: none;
+            }
+        }
+    }
+    
+}

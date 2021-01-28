@@ -1,0 +1,39 @@
+//Table
+
+.table th, .table td{
+    border: none;
+}
+
+
+// datatable Style
+table.dataTable {
+    thead{
+        .sorting:after{
+            content: "\f883" !important;
+            font-family: 'Font Awesome 5 Pro';
+        }
+        .sorting_asc:after{
+            content: "\f309" !important;
+            font-family: 'Font Awesome 5 Pro';
+        }
+        .sorting_desc:after{
+            content: "\f30c" !important;
+            font-family: 'Font Awesome 5 Pro';
+        }
+    }
+}
+
+table.table{
+    margin-top: 0 !important;
+    // margin-bottom: 15px !important;
+    thead{
+        th{
+            border-bottom: 1px solid $white_l;
+        }
+    }
+    tr{
+        td{
+            border-bottom: 1px solid $white_l;
+        }
+    }
+}
