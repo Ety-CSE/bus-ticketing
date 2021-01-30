@@ -2,9 +2,17 @@
   <div class="row">
     <div class="col-md-8 offset-md-2">
       <br>
-      <h4> <?php echo $this->coach_m->get_coach_trip($coach);?> ( Seat Plan )</h4>
-      <p><b>Route:</b> <?php echo $this->coach_m->get_route_trip($coach);?> |<b> Date:</b> <?php $date = unserialize($this->session->date); echo $date[0];?></p>
+      <?php 
+      // dump($trip);
+      //foreach($trip as $r): 
+
+        $coach = $this->coach_m->get_coach_by_id($this->uri->segment(4));
+        $date = unserialize($this->session->search);
+        ?>
+      <h4><?php echo $this->route_m->bus_by_id($coach->bus_id).' - '.$coach->no;?> ( Seat Plan )</h4>
+      <p><b>Route:</b> <?php  echo  $this->route_m->district_by_id($date[0]).' - '.$this->route_m->district_by_id($date[1]);?> | <b> Date:</b> <?php  echo $date[2];?></p>
       <hr>
+      
     </div>
   </div>
   <div class="row">
@@ -627,20 +635,258 @@
         <div class="col-4"><img src="<?php echo site_url('img/selected.png');?>" height="20px" alt=""> <small>Selected Seats</small></div>
         <div class="col-12">
         <hr>
+        <?php echo form_open();?>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Seats</th>
+              <th>Fare</th>
+              <th>Class</th>
+            </tr>
+          </thead>
+          <tbody id="seats">
+            <!-- Seats info will goes here -->
+          </tbody>
+        </table>
+        <div class="alert alert-info" role="alert">
+          <p><b>Total: <span id="total">0</span></b> BDT</p>
+        </div>
+        <?php 
+          $time = unserialize($trip->trip_time); 
+          $trip_no = $this->uri->segment(5);
+          ?>
+        <p><b>Boarding Point:</b> <?php echo $time[$trip_no][1];?> (<?php echo date('h:i a', strtotime($time[$trip_no][0]));?>)</p>
+        <p><b>Destination:</b> <?php echo $time[$trip_no][2];?></p>
+        <hr>
+        <b>Payment Method:</b><br>
+        <input type="hidden" name="seat_no[]" class="form-control seat_no" value="">
+        <input type="hidden" name="total" class="form-control total" value="">
+        <input type="hidden" name="user_id" id="user_id" class="form-control" value="<?php echo $this->session->userdata['id']; ?>">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" checked name="payment_meathod" id="bkash" value="bkash">
+          <label class="form-check-label" for="bkash">Bkash</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="payment_meathod" id="rocket" value="rocket">
+          <label class="form-check-label" for="rocket">Rocket</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="payment_meathod" id="nagod" value="nagod">
+          <label class="form-check-label" for="nagod">Nagod</label>
+        </div>
+        <div class="form-row">
+          <div class="form-group mb-2">
+            <label for="phone" class="sr-only">Pnone  NO</label>
+            <input type="text"  name="phone"  class="form-control" id="phone" required placeholder="Pnone NO">
+          </div>
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="trns_id" class="sr-only">Transaction ID</label>
+            <input type="text" name="trns_id" class="form-control" required id="trns_id" placeholder="Transaction ID">
+          </div>
+        </div>
+        <br>
+        <p><button type="<?php echo $user = ($this->session->userdata['loggedin']) ? 'submit':'button'; ?>" <?php echo $user = ($this->session->userdata['loggedin']) ? '':' data-toggle="modal" data-target="#loginModal"'; ?> class="btn btn-success btn-block" id="order_button">Order</button> <a href="<?php echo site_url();?>" class="btn btn-block btn-outline-warning">Cancel</a></p>
+        <br><?php //dump( $this->session->userdata); ?>
+        <div class="alert alert-success" role="alert">
+          <p class="text-center"><i class="fas fa-exclamation-triangle"></i> <b><small>Due to traffic condition, the trip may get canceled.</small></b></p>
+        </div>
+        <?php echo form_close();?>
+
         </div>
       </div>
     </div>
   </div>
 </div>
 
+
+<!-- modal -->
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <b class="modal-title" id="modal-title"><i class="fas fa-lock text-success"></i> Login</b>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- modal body -->
+        <div id="login_form" style="display:block">
+          <form>
+            <div class="warning"></div>
+            <div class="form-group">
+              <label for="login_email">Email address</label>
+              <input type="email" class="form-control" id="login_email" aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+              <label for="login_pass">Password</label>
+              <input type="password" class="form-control" id="login_pass" placeholder="Password">
+            </div>
+            <i class="fas fa-user"></i> New User? <a href="#" id="new_user"> <b>Create new Account</b> </a> <button type="submit" id="login_button" class="btn btn-success float-right">Login</button>
+          </form>
+        </div>
+        <div id="reg_from" style="display:none">
+          <form>
+          <div class="reg_warning"></div>
+            <div class="form-group">
+              <label for="reg_name">Full Name</label>
+              <input type="text" name="reg_name" class="form-control" id="reg_name" placeholder="Enter Name">
+            </div>
+            <div class="form-group">
+              <label for="reg_email">Email address</label>
+              <input type="email" name="reg_email" class="form-control" id="reg_email" placeholder="Enter Email">
+            </div>
+            <div class="form-group">
+              <label for="reg_pass">Password</label>
+              <input type="password" name="reg_pass" class="form-control" id="reg_pass" placeholder="Password">
+            </div>
+            <div class="form-group">
+              <label for="confirm_pass">Confirm-Password</label>
+              <input type="password" name="confirm_pass" class="form-control" id="confirm_pass" placeholder="Re-Password">
+            </div>
+            <i class="fas fa-user"></i> Registred User? <a href="#" id="old_user"> <b>Login</b> </a> <button type="submit" id="reg_button" class="btn btn-success float-right">Registration</button>
+          </form>
+        </div>
+        <!-- modal body -->
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+<!-- modal -->
+
+
 <script>
   $(document).ready(function(){
+
+    // login process
+    $('#login_button').click(function(){
+      event.preventDefault();
+      var email = $('#login_email').val();
+      var pass =  $('#login_pass').val();
+      if(email == ''){
+        $('.warning').html('<div class="alert alert-danger" role="alert">Email Required!</div>');
+      }else if(pass == ''){
+        $('.warning').html('<div class="alert alert-danger" role="alert">Password Required!</div>');
+      }else{
+        $('.warning').html('');
+
+
+          var url = '<?php echo site_url('admin/user/login_ajax');?>';
+          var data = {
+            email : email,
+            pass : pass,
+          };
+          // AJAX
+          $.post(url, data, function(result){
+              if(result){
+                $('#user_id').val(result);
+                $('#order_button').prop('type','submit');
+                $('#order_button').removeAttr('data-toggle');
+                $('#order_button').removeAttr('data-target');
+                $('#loginModal').modal('hide');
+              }else{
+                console.log(result);
+              }
+          });
+      }
+    });
+
+    // registration process
+    $('#reg_button').click(function(){
+      event.preventDefault();
+      var name = $('#reg_name').val();
+      var email = $('#reg_email').val();
+      var pass =  $('#reg_pass').val();
+      var r_pass =  $('#confirm_pass').val();
+      if(name == ''){
+        $('.reg_warning').html('<div class="alert alert-danger" role="alert">Name Required!</div>');
+      }else if(email == ''){
+        $('.reg_warning').html('<div class="alert alert-danger" role="alert">Email Required!</div>');
+      }else if(pass == '' || r_pass == '' ){
+        $('.reg_warning').html('<div class="alert alert-danger" role="alert">Password Required!</div>');
+      }else if(pass != r_pass){
+        $('.reg_warning').html('<div class="alert alert-danger" role="alert">Password Does not Match!</div>');
+      }else{
+        $('.reg_warning').html('');
+          var url = '<?php echo site_url('admin/user/reg_ajax');?>';
+          var data = {
+            name : name,
+            email : email,
+            password : pass,
+          };
+          // AJAX
+          $.post(url, data, function(result){
+              if(result){
+                $('#user_id').val(result);
+                $('#order_button').prop('type','submit');
+                $('#order_button').removeAttr('data-toggle');
+                $('#order_button').removeAttr('data-target');
+                $('#loginModal').modal('hide');
+              }else{
+                console.log(result);
+              }
+          });
+      }
+    });
+
+    $('#new_user').click(function(){
+      event.preventDefault();
+      $('#modal-title').html('<i class="fas fa-lock text-success"></i> Registration');
+      $('#login_form').css('display','none');
+      $('#reg_from').css('display','block');
+    });
+
+    $('#old_user').click(function(){
+      event.preventDefault();
+      $('#modal-title').html('<i class="fas fa-lock text-success"></i> Login');
+      $('#login_form').css('display','block');
+      $('#reg_from').css('display','none');
+    });
+
+    (function () {
+      var booked_seat = ['A1','B3'];  // I will invoke myself
+      for(var x=0; x < booked_seat.length; x++){
+        $('#'+booked_seat[x]).addClass('booked');
+      }
+    })();
+
     var seats = [];
     $('.st2').click(function(){
       $(this).toggleClass('select');
-      seats.push($(this).attr('id'));
+      if($.inArray($(this).attr('id'), seats ) != -1){
+          const index = seats.indexOf($(this).attr('id'));
+          if (index > -1) {
+            seats.splice(index, 1);
+          }
+      }else{
+        seats.push($(this).attr('id'));
+      }
+
+      var booking = '';
+      var fare = '<?php echo $coach->fare;?>';
+      var type = '<?php echo $this->trip_m->category($coach->type);?>';
+      var i;
+      for (i = 0; i < seats.length; ++i) {
+        booking += '<tr class="'+seats[i]+'">';
+        booking += '<td>'+seats[i]+'</td>';
+        booking += '<td class="fare">'+fare+' BDT</td>';
+        booking += '<td>'+type+'</td>';
+        booking += '</tr>';
+      }
+      $('#total').html(fare*seats.length);
+      $('.seat_no').val(seats);
+      $('.total').val(fare*seats.length);
+      $('#seats').html(booking);
+
     console.log(seats);
     });
+
+
   });
 
 </script>
+<?php //endforeach; ?>

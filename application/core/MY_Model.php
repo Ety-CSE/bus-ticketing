@@ -239,10 +239,17 @@ public function route_by_id($id){
     
     }
     
+
+    public function get_coachinfo_by_id($id=NULL){
+      $this->db->where('id', $id);
+      $parent = $this->db->get('coach');
+      $co = $parent->row();
+      return $co;
+    }
     
 // bus DW
 public function get_coach_trip($id=NULL){
-$this->db->where('route', $id);
+$this->db->where('id', $id);
 $parent = $this->db->get('coach');
 $co = $parent->row();
 // foreach($co as $c){
@@ -251,6 +258,14 @@ $co = $parent->row();
 return $coach;
 // dump($co);
 }
+
+// bus DW
+public function get_coach_route($id=NULL){
+  $this->db->where('route', $id);
+  $parent = $this->db->get('coach');
+  return $parent->row();
+
+  }
 
 public function get_route_trip($id=NULL){
   $this->db->where('route_no', $id);
@@ -262,13 +277,28 @@ public function get_route_trip($id=NULL){
   }
 
 // coach by trip
-public function trip_by_coach($id=NULL){
+public function trip_by_route($id=NULL){
   $this->db->where('route_id', $id);
   $parent = $this->db->get('trip');
   $coach = $parent->row();
 
   return $coach;
   }
+
+
+// public function get_route_by_trip($id=NULL){
+//   $this->db->where('id', $id);
+//   $sql = $this->db->get('trip');
+//   $coach = $sql->row();
+
+//   $route = $coach->route_id;
+
+//   $this->db->where('route_no', $route);
+//   $query = $this->db->get('route');
+//   $routes = $query->result();
+
+//   return $routes;
+// }
 
 public function get_route_dw(){
 
@@ -300,6 +330,15 @@ public function get_route_dw(){
     return $array;
     
     }
+
+
+    public function get_coach_by_id($id=NULL){
+      $this->db->where('id', $id);
+      $sql = $this->db->get('coach');
+      $coach = $sql->row();
+      return $coach;
+      
+      }
 
     public function coach_dw(){
       $parent = $this->db->get('coach');

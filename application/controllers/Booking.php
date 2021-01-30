@@ -12,6 +12,7 @@ class Booking extends Frontend_Controller
     $this->load->model('user_m');
     $this->load->model('route_m');
     $this->load->model('coach_m');
+    $this->load->model('trip_m');
     $this->load->model('bus_m');
     $this->load->helper('form');
   }
@@ -19,22 +20,26 @@ class Booking extends Frontend_Controller
   public function index($id=NULL)
   {
 
-      $this->data['trip'] = $this->route_m->trip_by_coach($id);
+      $this->data['coach'] = $this->route_m->get_coachinfo_by_id($id);
 
-      $this->data['coach'] = $id;
       $this->data['subview'] = 'admin/booking/trip';
       $this->load->view('_layout_main', $this->data);
   }
 
   public function seat($id=NULL)
   {
-
-      $this->data['trip'] = $this->route_m->trip_by_coach($id);
-
-      $this->data['coach'] = $id;
-      $this->data['subview'] = 'admin/booking/booking';
+      $this->data['trip'] = $this->trip_m->get($id);
+      $this->data['subview'] = 'admin/booking/seats';
       $this->load->view('_layout_main', $this->data);
   }
 
+  public function booking($id=NULL)
+  {
+      $this->data['trip'] = $this->trip_m->get($id);
+      $this->data['subview'] = 'admin/booking/seats';
+      $this->load->view('_layout_main', $this->data);
+  }
+
+  
 
 }

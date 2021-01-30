@@ -22,7 +22,9 @@ class Admin_Controller extends MY_Controller
       'admin/user/with_email',
       'admin/user/with_phone',
       'admin/user/forgot_password',
-      'admin/user/create_account'
+      'admin/user/create_account',
+      'admin/user/login_ajax',
+      'admin/user/reg_ajax'
     );
     if (in_array(uri_string(), $exception_uris) == FALSE) {
       # code...

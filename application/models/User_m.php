@@ -77,6 +77,52 @@ class User_M extends MY_Model
     }
   }
 
+    //Login Ajax
+    public function login_ajax($email=NULL, $pass=NULL)
+    {
+      // Login function
+      $user = $this->get_by(array(
+        'email'=> $email,
+        'password'=> $this->hash($pass),
+      ),TRUE);
+  
+      if (@count($user)) {
+        // Log in user
+        $data = array(
+          'name' => $user->name,
+          'email' => $user->email,
+          'id' => $user->id,
+          'type' => $user->type,
+          'loggedin' => TRUE,
+        );
+        $this->session->set_userdata($data);
+        return $this->session->userdata('id');
+      }
+    }
+
+    //Login Ajax
+    public function reg_ajax($name=NULL,$email=NULL, $pass=NULL)
+      {
+        // Login function
+        $user = $this->get_by(array(
+          'email'=> $email,
+          'password'=> $this->hash($pass),
+        ),TRUE);
+    
+        if (@count($user)) {
+          // Log in user
+          $data = array(
+            'name' => $user->name,
+            'email' => $user->email,
+            'id' => $user->id,
+            'type' => $user->type,
+            'loggedin' => TRUE,
+          );
+          $this->session->set_userdata($data);
+          return $this->session->userdata('id');
+        }
+      }
+
   //Logout function
   public function logout()
   {

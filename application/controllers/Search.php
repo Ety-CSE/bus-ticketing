@@ -16,14 +16,14 @@ class Search extends Frontend_Controller
     $this->load->helper('form');
   }
 
-  public function index()
+  public function index($to=NULL,$from=NULL)
   {
       $to = $this->input->post('where_to');
       $from = $this->input->post('where_from');
       $d_of_journy = $this->input->post('d_of_journy');
       $d_of_return = $this->input->post('d_of_return');
       $this->data['route'] = $this->route_m->district_by_id($to).' - '.$this->route_m->district_by_id($from);
-      $_SESSION['date'] = serialize(array($d_of_journy, $d_of_return));
+      $_SESSION['search'] = serialize(array($to,$from,$d_of_journy, $d_of_return));
       $this->data['coach'] = $this->coach_m->get_coach($to, $from, $d_of_journy, $d_of_return);
       $this->data['subview'] = 'admin/booking/index';
       $this->load->view('_layout_main', $this->data);

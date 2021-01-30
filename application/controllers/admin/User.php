@@ -9,8 +9,7 @@ class User extends Admin_Controller
   public function __construct()
   {
     parent::__construct();
-    // $this->load->model('user_m');
-    $this->session->set_userdata('upload_dir', $this->uri->segment(2));
+    $this->load->model('user_m');
   }
 
   //User List
@@ -95,6 +94,49 @@ class User extends Admin_Controller
     $this->data['subview'] = 'admin/user/login';
     $this->load->view('admin/_layout_modal', $this->data);
   }
+
+//Login Page
+public function login_ajax(){
+    
+    $email = $this->input->post('email');
+    $pass = $this->input->post('pass');
+    if($this->user_m->login_ajax($email, $pass) == TRUE){
+      echo $this->session->userdata('id');
+    }else{
+      // Login Error;
+      echo "false";
+    }
+  
+}
+
+//Login Page
+public function reg_ajax(){
+  $id = ""; 
+  $data = $this->user_m->array_from_post(array('name', 'email', 'password'));
+  $data['password'] = $this->user_m->hash($data['password']);
+  // $data['name'] = '3';
+  // $data['email'] = '3';
+  $data['type'] = '3';
+  $data['status'] = '0';
+  $save = $this->db->insert('users',$data);
+
+
+  if($save){
+    $data = array(
+      'name' => $user->name,
+      'email' => $user->email,
+      'id' => $this->db->insert_id(),
+      'type' => $user->type,
+      'loggedin' => TRUE,
+    );
+    $this->session->set_userdata($data);
+    echo $this->session->userdata('id');
+  }else{
+    dump('false');
+  }
+
+}
+
 
   // Log Out Page
   public function logout(){
