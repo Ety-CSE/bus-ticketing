@@ -222,30 +222,59 @@ public function route_by_id($id){
 
 }
 
-  // bus DW
-  public function get_coach_dw(){
-    // $this->db->select('bus_id', 'route', 'no');
-    $parent = $this->db->get('coach');
-    $array = array(
-      "" => 'Select Coach'
-    );
-    if (count($parent->result())) {
-      foreach ($parent->result() as $loc) {
-        $array[$loc->id] = $this::bus_by_id($loc->bus_id).' | '.$loc->no.' ( '.$this::route_by_id($loc->route).' )';
-      }
+// booking by id
+public function booking_by_id($id){
+  $this->db->where('user_id', $id);
+
+  $query = $this->db->get('booking');  
+  $route = $query->result();
+  return  $route;
+
+}
+
+// uiser_by_id
+public function get_booked_seats($trip_id=NULL, $trip_no=NULL, $journey_date=NULL){
+  $this->db->where('trip_id', $trip_id);
+  $this->db->where('trip_no', $trip_no);
+  $this->db->where('journey_date', $journey_date);
+  $this->db->where('status', '0');
+
+  $query = $this->db->get('booking');  
+  $s = $query->result();
+  $seats = "";
+  foreach($s as $seat){
+    $seats .= ','.$seat->seat_no;
+  }
+  return substr($seats, 1);
+  // dump($trip_id.' '.$trip_no.' '.$journey_date);
+
+}
+
+
+// bus DW
+public function get_coach_dw(){
+  // $this->db->select('bus_id', 'route', 'no');
+  $parent = $this->db->get('coach');
+  $array = array(
+    "" => 'Select Coach'
+  );
+  if (count($parent->result())) {
+    foreach ($parent->result() as $loc) {
+      $array[$loc->id] = $this::bus_by_id($loc->bus_id).' | '.$loc->no.' ( '.$this::route_by_id($loc->route).' )';
     }
-    return $array;
-    
-    
-    }
+  }
+  return $array;
+  
+  
+  }
     
 
-    public function get_coachinfo_by_id($id=NULL){
-      $this->db->where('id', $id);
-      $parent = $this->db->get('coach');
-      $co = $parent->row();
-      return $co;
-    }
+  public function get_coachinfo_by_id($id=NULL){
+    $this->db->where('id', $id);
+    $parent = $this->db->get('coach');
+    $co = $parent->row();
+    return $co;
+  }
     
 // bus DW
 public function get_coach_trip($id=NULL){
@@ -286,19 +315,23 @@ public function trip_by_route($id=NULL){
   }
 
 
-// public function get_route_by_trip($id=NULL){
-//   $this->db->where('id', $id);
-//   $sql = $this->db->get('trip');
-//   $coach = $sql->row();
+public function get_route_by_trip($id=NULL,$trip_no=NULL){
+  $this->db->where('id', $id);
+  $sql = $this->db->get('trip');
+  $trip = $sql->row();
+  $route = unserialize($trip->trip_time);
 
-//   $route = $coach->route_id;
+  return $route[$trip_no][1].' - '.$route[$trip_no][2];
+}
 
-//   $this->db->where('route_no', $route);
-//   $query = $this->db->get('route');
-//   $routes = $query->result();
+public function get_time_by_trip($id=NULL,$trip_no=NULL){
+  $this->db->where('id', $id);
+  $sql = $this->db->get('trip');
+  $trip = $sql->row();
+  $route = unserialize($trip->trip_time);
 
-//   return $routes;
-// }
+  return date('h:i a', strtotime($route[$trip_no][0]));
+}
 
 public function get_route_dw(){
 
@@ -337,6 +370,14 @@ public function get_route_dw(){
       $sql = $this->db->get('coach');
       $coach = $sql->row();
       return $coach;
+      
+      }
+
+    public function get_coach_category_by_id($id=NULL){
+      $this->db->where('id', $id);
+      $sql = $this->db->get('coach');
+      $coach = $sql->row();
+      return $coach->category;
       
       }
 
@@ -486,21 +527,21 @@ public function get_route_dw(){
 
 
 // Seller Status
-public function seller_status($int){
+public function booking_status($int){
   switch ($int) {
 
     case NULL:
       $status = 'Not Requested';
       break;
     case '0':
-      $status = 'Pending';
+      $status = 'Active';
       break;
     case '1':
-      $status = 'Approved';
+      $status = 'Canceled';
       break;
       
     default:
-      $status = 'Junk User';
+      $status = 'Junk';
       break;
   }
   return $status;

@@ -22,14 +22,16 @@ class Booking_M extends MY_Model
   }
 
   public function get_new(){
-    $bus = new stdClass();
-    $bus->seat_no = '';
-    $bus->user_id = '';
-    $bus->journey_date = '';
-    $bus->trip_id = '';
-    $bus->payment = '';
-    $bus->status = '';
-    return $bus;
+    $booking = new stdClass();
+    $booking->seat_no = '';
+    $booking->user_id = '';
+    $booking->journey_date = '';
+    $booking->trip_id = '';
+    $booking->trip_no = '';
+    $booking->cosch_id = '';
+    $booking->payment = '';
+    $booking->status = '';
+    return $booking;
   }
 
 }

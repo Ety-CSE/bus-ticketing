@@ -80,73 +80,7 @@
 	</div>
 
 
-<br><br>
-	<div class="row">
-		<div class="content-header col-12">
-				<h2 class="content-title"><i class="fa fa-hourglass-half la-2x">  </i> Quick Action</h2>
-			</div>
-	</div>
 
-	<div class="row dashboard">
-
-		<div class="col-md-3">
-			<div class="card mb-3 dash">
-			  <div class="row no-gutters">
-					<div class="col-md-8">
-						<div class="card-body">
-							<h5 class="card-title">
-								<i class="fa fa-plus"></i>
-							</h5>
-							<p class="card-text sub-title">Add Sell</p>
-							<p class="card-text"><small>Add New Sales</small>
-								<!-- <small class="text-muted"><b>Today: </b> <span class="num">04</span></small> -->
-							</p>
-						</div>
-					</div>
-			    <div class="col-md-4 icon">
-			      <i class="fa fa-cart-plus fa-3x"></i>
-			    </div>
-			  </div>
-			</div>
-		</div>
-
-		<div class="col-md-3">
-			<a href="<?php echo site_url('admin/product/edit'); ?>">
-				<div class="card mb-3 dash">
-					<div class="row no-gutters">
-						<div class="col-md-8">
-							<div class="card-body">
-								<h5 class="card-title"><i class="fa fa-plus"></i></h5>
-								<p class="card-text sub-title">Add Medicine</p>
-								<p class="card-text">
-									<small>Add new product</small>
-								</p>
-							</div>
-						</div>
-						<div class="col-md-4 icon">
-							<i class="	fa fa-medkit fa-3x"></i>
-						</div>
-					</div>
-				</div>
-			</a>
-		</div>
-
-		<div class="col-md-3">
-			<div class="card mb-3 dash">
-				<div class="row no-gutters">
-					<div class="col-md-8">
-						<div class="card-body">
-							<h5 class="card-title"><i class="fa fa-hourglass-half"></i></h5>
-							<p class="card-text sub-title">Pending Delivery</p>
-							<p class="card-text"><small class="text-muted"><b>Today: </b> <span class="num"><?php //echo count($this->user_m->processed()); ?></span></small></p>
-						</div>
-					</div>
-					<div class="col-md-4 icon">
-						<i class="fa fa-truck fa-3x"></i>
-					</div>
-				</div>
-			</div>
-		</div>
 
 		<!-- <div class="col-md-3">
 			<a href="#" class="card mb-3 dash">

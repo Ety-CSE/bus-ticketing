@@ -7915,6 +7915,11 @@ footer {
 .st2 {
   cursor: pointer; }
 
+.others {
+  fill: #e5e5e5 !important;
+  cursor: context-menu !important;
+  pointer-events: none !important; }
+
 .st2:hover {
   fill: #2bb673; }
 

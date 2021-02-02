@@ -13,6 +13,7 @@ class Booking extends Frontend_Controller
     $this->load->model('route_m');
     $this->load->model('coach_m');
     $this->load->model('trip_m');
+    $this->load->model('booking_m');
     $this->load->model('bus_m');
     $this->load->helper('form');
   }
@@ -33,13 +34,13 @@ class Booking extends Frontend_Controller
       $this->load->view('_layout_main', $this->data);
   }
 
-  public function booking($id=NULL)
-  {
-      $this->data['trip'] = $this->trip_m->get($id);
-      $this->data['subview'] = 'admin/booking/seats';
-      $this->load->view('_layout_main', $this->data);
-  }
+
+  // public function booking_ajax(){
+
+  // }
+
 
   
 
 }
+ 

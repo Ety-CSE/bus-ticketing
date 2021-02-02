@@ -3,11 +3,11 @@
     <div class="col-md-8 offset-md-2">
       <br>
       <?php 
-      // dump($trip);
       //foreach($trip as $r): 
-
-        $coach = $this->coach_m->get_coach_by_id($this->uri->segment(4));
         $date = unserialize($this->session->search);
+        $coach = $this->coach_m->get_coach_by_id($this->uri->segment(4));
+        $booked_seats = $this->coach_m->get_booked_seats($this->uri->segment(3), $this->uri->segment(5), $date[2]);
+
         ?>
       <h4><?php echo $this->route_m->bus_by_id($coach->bus_id).' - '.$coach->no;?> ( Seat Plan )</h4>
       <p><b>Route:</b> <?php  echo  $this->route_m->district_by_id($date[0]).' - '.$this->route_m->district_by_id($date[1]);?> | <b> Date:</b> <?php  echo $date[2];?></p>
@@ -635,7 +635,7 @@
         <div class="col-4"><img src="<?php echo site_url('img/selected.png');?>" height="20px" alt=""> <small>Selected Seats</small></div>
         <div class="col-12">
         <hr>
-        <?php echo form_open();?>
+        <form id="booking">
         <table class="table">
           <thead>
             <tr>
@@ -649,7 +649,7 @@
           </tbody>
         </table>
         <div class="alert alert-info" role="alert">
-          <p><b>Total: <span id="total">0</span></b> BDT</p>
+          <p><b>Total: <span class="total">0</span></b> BDT</p>
         </div>
         <?php 
           $time = unserialize($trip->trip_time); 
@@ -659,9 +659,13 @@
         <p><b>Destination:</b> <?php echo $time[$trip_no][2];?></p>
         <hr>
         <b>Payment Method:</b><br>
-        <input type="hidden" name="seat_no[]" class="form-control seat_no" value="">
-        <input type="hidden" name="total" class="form-control total" value="">
-        <input type="hidden" name="user_id" id="user_id" class="form-control" value="<?php echo $this->session->userdata['id']; ?>">
+        <input type="hidden" id="seat_no" name="seat_no" class="form-control seat_no" value="">
+        <input type="hidden" id="total" name="total" class="form-control" value="">
+        <input type="hidden" id="coach_id" name="coach_id" class="form-control " value="<?php echo $this->uri->segment(4); ?>">
+        <input type="hidden" id="trip_id" name="trip_id" class="form-control " value="<?php echo $this->uri->segment(3); ?>">
+        <input type="hidden" id="trip_no" name="trip_no" class="form-control " value="<?php echo $this->uri->segment(5); ?>">
+        <input type="hidden" id="journey_date" name="journey_date" class="form-control" value="<?php echo $date[2]; ?>">
+        <input type="hidden" id="user_id" name="user_id" class="form-control" value="<?php echo $this->session->userdata['id']; ?>">
         <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" checked name="payment_meathod" id="bkash" value="bkash">
           <label class="form-check-label" for="bkash">Bkash</label>
@@ -686,7 +690,7 @@
         </div>
         <br>
         <p><button type="<?php echo $user = ($this->session->userdata['loggedin']) ? 'submit':'button'; ?>" <?php echo $user = ($this->session->userdata['loggedin']) ? '':' data-toggle="modal" data-target="#loginModal"'; ?> class="btn btn-success btn-block" id="order_button">Order</button> <a href="<?php echo site_url();?>" class="btn btn-block btn-outline-warning">Cancel</a></p>
-        <br><?php //dump( $this->session->userdata); ?>
+        <br><?php //dump( $this->session->date); ?>
         <div class="alert alert-success" role="alert">
           <p class="text-center"><i class="fas fa-exclamation-triangle"></i> <b><small>Due to traffic condition, the trip may get canceled.</small></b></p>
         </div>
@@ -758,7 +762,7 @@
 </div>
 <!-- modal -->
 
-
+<?php $seats =  explode(',',$booked_seats);?>
 <script>
   $(document).ready(function(){
 
@@ -848,9 +852,16 @@
     });
 
     (function () {
-      var booked_seat = ['A1','B3'];  // I will invoke myself
+      var s = '<?php echo count($seats);?>';
+      var booked_seat;
+      if( s != 1){
+       booked_seat = [<?php echo '"'.implode('","', $seats).'"' ?>];//'';  // I will invoke myself
+      }else{
+        booked_seat = '';
+      }
+      // console.log(booked_seat);
       for(var x=0; x < booked_seat.length; x++){
-        $('#'+booked_seat[x]).addClass('booked');
+        $("#"+booked_seat[x]).addClass('booked');
       }
     })();
 
@@ -877,12 +888,57 @@
         booking += '<td>'+type+'</td>';
         booking += '</tr>';
       }
-      $('#total').html(fare*seats.length);
+      $('#total').val(fare*seats.length);
       $('.seat_no').val(seats);
-      $('.total').val(fare*seats.length);
+      $('.total').html(fare*seats.length);
       $('#seats').html(booking);
 
     console.log(seats);
+    });
+
+
+    $( "#booking" ).submit(function(){
+      var seat_no, user_id, journey_date, trip_id, trip_no, coach_id, total, payment_meathod, phone, trns_id;
+
+      seat_no = $('#seat_no').val();
+      user_id = $('#user_id').val();
+      journey_date = $('#journey_date').val();
+      trip_id = $('#trip_id').val();
+      trip_no = $('#trip_no').val();
+      coach_id = $('#coach_id').val();
+      total = $('#total').val();
+      payment_meathod = $('input[name="payment_meathod"]:checked').val();
+      phone = $('#phone').val();
+      trns_id = $('#trns_id').val();
+      var url = '<?php echo site_url('search/ajax_save/');?>';
+      var data = {
+        seat_no :      seat_no,
+        user_id :      user_id,
+        journey_date : journey_date,
+        trip_id :      trip_id,
+        trip_no :      trip_no,
+        coach_id :     coach_id,
+        total :        total,
+        payment_meathod:payment_meathod,
+        phone :        phone,
+        trns_id :      trns_id,
+      }
+
+      // AJAX
+      $.post(url, data, function(result){
+              if(result){
+                window.location.href = '<?php echo site_url('admin/customer/booking/');?>'+result;
+                // console.log(result);
+              }else{
+                console.log(result);
+              }
+          });
+
+                // console.log(data);
+                // // console.log(u);
+
+      event.preventDefault(); 
+
     });
 
 

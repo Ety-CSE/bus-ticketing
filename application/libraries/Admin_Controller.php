@@ -24,7 +24,8 @@ class Admin_Controller extends MY_Controller
       'admin/user/forgot_password',
       'admin/user/create_account',
       'admin/user/login_ajax',
-      'admin/user/reg_ajax'
+      'admin/user/reg_ajax',
+      // 'booking/booking_ajax'
     );
     if (in_array(uri_string(), $exception_uris) == FALSE) {
       # code...

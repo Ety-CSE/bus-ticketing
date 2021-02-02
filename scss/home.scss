@@ -117,10 +117,15 @@ footer{
 .st2{
     cursor: pointer;
 }
+.others{
+    fill: $white_l !important;
+    cursor: context-menu !important;
+    pointer-events: none !important;
+}
 .st2:hover{
     fill: $green;
 }
-.booked{
+.booked{ 
     fill: $white_d !important;
     cursor: context-menu !important;
     pointer-events: none;

@@ -12,6 +12,7 @@ class Search extends Frontend_Controller
     $this->load->model('user_m');
     $this->load->model('route_m');
     $this->load->model('coach_m');
+    $this->load->model('booking_m');
     $this->load->model('bus_m');
     $this->load->helper('form');
   }
@@ -27,6 +28,20 @@ class Search extends Frontend_Controller
       $this->data['coach'] = $this->coach_m->get_coach($to, $from, $d_of_journy, $d_of_return);
       $this->data['subview'] = 'admin/booking/index';
       $this->load->view('_layout_main', $this->data);
+  }
+
+  public function ajax_save(){
+    $data = $this->coach_m->array_from_post(array('seat_no', 'user_id','journey_date','trip_id','trip_no', 'coach_id'));
+    $data['payment'] =  serialize(array($this->input->post('total'),$this->input->post('payment_meathod'),$this->input->post('phone'),$this->input->post('trns_id')));
+    $data['status'] = '0';
+
+    if($this->booking_m->save($data)){
+      echo $this->db->insert_id();
+    }
+    else{
+      echo 'false';
+    }
+    // dump($data);
   }
 
 
