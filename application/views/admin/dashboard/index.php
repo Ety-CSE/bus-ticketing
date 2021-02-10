@@ -11,9 +11,9 @@
 			  <div class="row no-gutters">
 					<div class="col-md-8">
 						<div class="card-body">
-							<h5 class="card-title">5165<?php //echo count($this->user_m->total_sell()); ?></h5>
-							<p class="card-text sub-title">Total Sales</p>
-							<p class="card-text"><small class="text-muted"><b>Today: </b> <span class="num">51<?php //echo count($this->user_m->today_sell()); ?></span></small></p>
+							<h5 class="card-title"><?php echo $this->user_m->total_booked(); ?></h5>
+							<p class="card-text sub-title">Total Booked</p>
+							<p class="card-text"><small class="text-muted"><b>Total Cancle: </b> <span class="num"><?php echo $this->user_m->total_Cancle(); ?></span></small></p>
 						</div>
 					</div>
 			    <div class="col-md-4 icon">
@@ -28,33 +28,31 @@
 				<div class="row no-gutters">
 					<div class="col-md-8">
 						<div class="card-body">
-							<h5 class="card-title">21653<?php //echo count($this->user_m->total_product()); ?></h5>
-							<p class="card-text sub-title">Total Medicine</p>
+							<h5 class="card-title"><?php echo $this->user_m->total_coach(); ?></h5>
+							<p class="card-text sub-title">Total Coach</p>
 							<p class="card-text">
-								<small class="text-muted"><b>Out of Stock:</b> <span class="num">25<?php //echo $this->user_m->outofstock_product(); ?></span></small>
-								<!-- <small class="text-muted right"><b>Expired:</b> <span class="num">13<?php //echo count($this->user_m->expired_product()); ?></span></small> -->
+								<small class="text-muted"><b>Out of Service:</b> <span class="num"> <?php echo $this->user_m->ooservice_coach(); ?></span></small>
 							</p>
 						</div>
 					</div>
 					<div class="col-md-4 icon">
-						<i class="	fa fa-medkit fa-3x"></i>
+						<i class="	fa fa-bus fa-3x"></i>
 					</div>
 				</div>
 			</div>
 		</div>
-
 		<div class="col-md-3">
 			<div class="card mb-3 dash">
 				<div class="row no-gutters">
 					<div class="col-md-8">
 						<div class="card-body">
-							<h5 class="card-title">50000<?php //echo count($this->user_m->all_order()); ?></h5>
-							<p class="card-text sub-title">Delivery Request</p>
-							<p class="card-text"><small class="text-muted"><b>Today: </b> <span class="num">123<?php //echo count($this->user_m->today_order()); ?></span></small></p>
+							<h5 class="card-title"><?php echo $this->user_m->total_route(); ?></h5>
+							<p class="card-text sub-title">Total Route</p>
+							<p class="card-text"><small class="text-muted"><b>Cancle: </b> <span class="num"><?php echo $this->user_m->ooservice_route(); ?></span></small></p>
 						</div>
 					</div>
 					<div class="col-md-4 icon">
-						<i class="fa fa-truck fa-3x"></i>
+						<i class="fa fa-route fa-3x"></i>
 					</div>
 				</div>
 			</div>
@@ -65,9 +63,9 @@
 				<div class="row no-gutters">
 					<div class="col-md-8">
 						<div class="card-body">
-							<h5 class="card-title"><?php //echo $this->user_m->total_customer(); ?>2000</h5>
+							<h5 class="card-title"><?php echo $this->user_m->total_customer(); ?></h5>
 							<p class="card-text sub-title">Total Customer</p>
-							<p class="card-text"><small class="text-muted"><b>Today: </b> <span class="num">150<?php //echo $this->user_m->today_customer(); ?></span></small></p>
+							<p class="card-text"><small class="text-muted"><b>Syspended Customer: </b> <span class="num"><?php echo $this->user_m->sys_customer(); ?></span></small></p>
 						</div>
 					</div>
 					<div class="col-md-4 icon">
@@ -90,6 +88,7 @@
 	<div class="row dashboard">
 
 		<div class="col-md-3">
+			<a href="<?php echo site_url('admin/bus/edit'); ?>">
 			<div class="card mb-3 dash">
 			  <div class="row no-gutters">
 					<div class="col-md-8">
@@ -97,34 +96,34 @@
 							<h5 class="card-title">
 								<i class="fa fa-plus"></i>
 							</h5>
-							<p class="card-text sub-title">Add Sell</p>
-							<p class="card-text"><small>Add New Sales</small>
-								<!-- <small class="text-muted"><b>Today: </b> <span class="num">04</span></small> -->
+							<p class="card-text sub-title">Add Bus</p>
+							<p class="card-text"><small>Add New Bus</small>
 							</p>
 						</div>
 					</div>
 			    <div class="col-md-4 icon">
-			      <i class="fa fa-cart-plus fa-3x"></i>
+			      <i class="fa fa-bus fa-3x"></i>
 			    </div>
 			  </div>
 			</div>
+			</a>
 		</div>
 
 		<div class="col-md-3">
-			<a href="<?php echo site_url('admin/product/edit'); ?>">
+			<a href="<?php echo site_url('admin/coach/edit'); ?>">
 				<div class="card mb-3 dash">
 					<div class="row no-gutters">
 						<div class="col-md-8">
 							<div class="card-body">
 								<h5 class="card-title"><i class="fa fa-plus"></i></h5>
-								<p class="card-text sub-title">Add Medicine</p>
+								<p class="card-text sub-title">Add Coach</p>
 								<p class="card-text">
-									<small>Add new product</small>
+									<small>Add new Coach</small>
 								</p>
 							</div>
 						</div>
 						<div class="col-md-4 icon">
-							<i class="	fa fa-medkit fa-3x"></i>
+							<i class="	fa fa-subway fa-3x"></i>
 						</div>
 					</div>
 				</div>
@@ -132,38 +131,41 @@
 		</div>
 
 		<div class="col-md-3">
+			<a href="<?php echo site_url('admin/route/edit'); ?>">
 			<div class="card mb-3 dash">
 				<div class="row no-gutters">
 					<div class="col-md-8">
 						<div class="card-body">
-							<h5 class="card-title"><i class="fa fa-hourglass-half"></i></h5>
-							<p class="card-text sub-title">Pending Delivery</p>
-							<p class="card-text"><small class="text-muted"><b>Today: </b> <span class="num"><?php //echo count($this->user_m->processed()); ?></span></small></p>
+							<h5 class="card-title"><i class="fa fa-plus"></i></h5>
+							<p class="card-text sub-title">Add Route</p>
+							<p class="card-text"><small class="text-muted"><b>Add New Route </b> </small></p>
 						</div>
 					</div>
 					<div class="col-md-4 icon">
-						<i class="fa fa-truck fa-3x"></i>
+						<i class="fa fa-route fa-3x"></i>
 					</div>
 				</div>
 			</div>
+			</a>
 		</div>
 
-		<!-- <div class="col-md-3">
-			<a href="#" class="card mb-3 dash">
+		<div class="col-md-3">
+			<a href="<?php echo site_url('admin/trip/edit'); ?>">
+			<div class="card mb-3 dash">
 				<div class="row no-gutters">
 					<div class="col-md-8">
 						<div class="card-body">
-							<h5 class="card-title"><i class="fa fa-eye"></i></h5>
-							<p class="card-text sub-title">View Reports</p>
-							<p class="card-text"><small class="text-muted"><b>Today: </b> <span class="num">04</span></small></p>
+							<h5 class="card-title"><i class="fa fa-plus"></i></h5>
+							<p class="card-text sub-title">Add Trip</p>
+							<p class="card-text"><small class="text-muted"><b>Add New Trip </b> </small></p>
 						</div>
 					</div>
 					<div class="col-md-4 icon">
-						<i class="fa fa-pie-chart fa-3x"></i>
+						<i class="fa fa-history fa-3x"></i>
 					</div>
 				</div>
+			</div>
 			</a>
-		</div> -->
 
 	</div>
 

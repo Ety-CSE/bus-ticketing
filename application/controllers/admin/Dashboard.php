@@ -29,7 +29,7 @@ class Dashboard extends Admin_Controller
 
   //customer Dashboard 
   public function customer(){
-    $this->user_m->access_permission('3');
+    $dashboard = $this->user_m->access_permission('3');
     $this->data['subview'] = "admin/dashboard/customer";
     $this->load->view('admin/_layout_main', $this->data);
   }

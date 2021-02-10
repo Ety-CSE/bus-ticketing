@@ -441,6 +441,146 @@ public function get_route_dw(){
     
     
       }
+      // total_customer
+      public function total_customer(){
+        $query = $this->db->where('type', 3);
+        $query = $this->db->get('users');
+        $booking = $query->result();
+        echo count($booking);
+      }
+      // total_customer
+      public function sys_customer(){
+        $query = $this->db->where('status', 1);
+        $query = $this->db->where('type', 3);
+        $query = $this->db->get('users');
+        $booking = $query->result();
+        echo count($booking);
+      }
+            
+       // total_route
+       public function total_route(){
+        $query = $this->db->get('route');
+        $booking = $query->result();
+          echo count($booking);
+      }  
+
+      // total_route
+      public function ooservice_route(){
+        $query = $this->db->where('status', 1);
+        $query = $this->db->get('route');
+        $booking = $query->result();
+          echo count($booking);
+      }
+
+      // total_coach
+      public function total_coach(){
+        $query = $this->db->get('coach');
+        $booking = $query->result();
+          echo count($booking);
+      }
+
+      // total_coach
+      public function ooservice_coach(){
+        $query = $this->db->where('status', 1);
+        $query = $this->db->get('coach');
+        $booking = $query->result();
+          echo count($booking);
+      }
+
+      // total_booked
+      public function total_booked(){
+        $this->db->select('seat_no');
+    
+        $query = $this->db->get('booking');
+        
+        $booking = $query->result();
+        if(@count($booking)){
+          $total_seat = 0;
+          foreach($booking as $b){
+            $seat =  explode ( "," , $b->seat_no);
+            $s = @count($seat);
+            $total_seat = $total_seat+$s; 
+          }
+          echo $total_seat;
+        }
+      }
+
+      // total_booked
+      public function total_Cancle(){
+        $this->db->select('seat_no');
+        $this->db->where('status', '1');
+    
+        $query = $this->db->get('booking');
+        
+        $booking = $query->result();
+        if(@count($booking)){
+          $total_seat = 0;
+          foreach($booking as $b){
+            $seat =  explode ( "," , $b->seat_no);
+            $s = @count($seat);
+            $total_seat = $total_seat+$s; 
+          }
+          echo $total_seat;
+        }
+      }
+
+      // total_booked_seat
+      public function total_booked_seat(){
+        $this->db->select('seat_no');
+        $this->db->where('user_id', $this->session->userdata('id'));
+    
+        $query = $this->db->get('booking');
+        
+        $booking = $query->result();
+        if(count($booking)){
+          $total_seat = 0;
+          foreach($booking as $b){
+            $seat =  explode ( "," , $b->seat_no);
+            $s = count($seat);
+            $total_seat = $total_seat+$s; 
+          }
+          echo $total_seat;
+        }
+      }
+
+      // total_booked_seat
+      public function total_cancle_seat(){
+        $this->db->select('seat_no');
+        $this->db->where('user_id', $this->session->userdata('id'));
+        $this->db->where('status', '1');
+        
+        $query = $this->db->get('booking');
+        
+        $booking = $query->result();
+        if(count($booking)){
+          $total_seat = 0;
+          foreach($booking as $b){
+            $seat =  explode ( "," , $b->seat_no);
+            $s = count($seat);
+            $total_seat = $total_seat+$s; 
+          }
+          echo $total_seat;
+        }
+      }
+      
+      // total_expend
+      public function total_expend(){
+        $this->db->select('payment');
+        $this->db->where('user_id', $this->session->userdata('id'));
+        $this->db->where('status', '0');
+    
+        $query = $this->db->get('booking');
+        
+        $booking = $query->result();
+        if(count($booking)){
+          $total = 0;
+          foreach($booking as $b){
+            $payment =  unserialize( $b->payment);
+            $total = $total+$payment[0]; 
+          }
+          echo $total;
+        }
+      }
 /*====================================
 =================USER=================
 ======================================*/

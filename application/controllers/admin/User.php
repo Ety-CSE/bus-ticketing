@@ -123,10 +123,10 @@ public function reg_ajax(){
 
   if($save){
     $data = array(
-      'name' => $user->name,
-      'email' => $user->email,
+      'name' => $data['name'],
+      'email' => $data['email'],
       'id' => $this->db->insert_id(),
-      'type' => $user->type,
+      'type' => $data['type'],
       'loggedin' => TRUE,
     );
     $this->session->set_userdata($data);

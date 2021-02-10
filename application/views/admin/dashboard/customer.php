@@ -11,9 +11,9 @@
 			  <div class="row no-gutters">
 					<div class="col-md-8">
 						<div class="card-body">
-							<h5 class="card-title">5165<?php //echo count($this->user_m->total_sell()); ?></h5>
-							<p class="card-text sub-title">Total Sales</p>
-							<p class="card-text"><small class="text-muted"><b>Today: </b> <span class="num">51<?php //echo count($this->user_m->today_sell()); ?></span></small></p>
+							<h5 class="card-title"><?php echo $this->user_m->total_booked_seat(); ?></h5>
+							<p class="card-text sub-title">Total Booked Seats</p>
+							<p class="card-text"><small class="text-muted"><b>Cancle: </b> <span class="num"><?php echo $this->user_m->total_cancle_seat(); ?></span></small></p>
 						</div>
 					</div>
 			    <div class="col-md-4 icon">
@@ -28,10 +28,10 @@
 				<div class="row no-gutters">
 					<div class="col-md-8">
 						<div class="card-body">
-							<h5 class="card-title">21653<?php //echo count($this->user_m->total_product()); ?></h5>
-							<p class="card-text sub-title">Total Medicine</p>
+							<h5 class="card-title"><?php echo $this->user_m->total_expend(); ?> BDT</h5>
+							<p class="card-text sub-title">Total Invoice</p>
 							<p class="card-text">
-								<small class="text-muted"><b>Out of Stock:</b> <span class="num">25<?php //echo $this->user_m->outofstock_product(); ?></span></small>
+								<small class="text-muted"><b>Due:</b> <span class="num">0 BDT<?php //echo $this->user_m->outofstock_product(); ?></span></small>
 								<!-- <small class="text-muted right"><b>Expired:</b> <span class="num">13<?php //echo count($this->user_m->expired_product()); ?></span></small> -->
 							</p>
 						</div>
@@ -43,40 +43,8 @@
 			</div>
 		</div>
 
-		<div class="col-md-3">
-			<div class="card mb-3 dash">
-				<div class="row no-gutters">
-					<div class="col-md-8">
-						<div class="card-body">
-							<h5 class="card-title">50000<?php //echo count($this->user_m->all_order()); ?></h5>
-							<p class="card-text sub-title">Delivery Request</p>
-							<p class="card-text"><small class="text-muted"><b>Today: </b> <span class="num">123<?php //echo count($this->user_m->today_order()); ?></span></small></p>
-						</div>
-					</div>
-					<div class="col-md-4 icon">
-						<i class="fa fa-truck fa-3x"></i>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-md-3">
-			<div class="card mb-3 dash">
-				<div class="row no-gutters">
-					<div class="col-md-8">
-						<div class="card-body">
-							<h5 class="card-title"><?php //echo $this->user_m->total_customer(); ?>2000</h5>
-							<p class="card-text sub-title">Total Customer</p>
-							<p class="card-text"><small class="text-muted"><b>Today: </b> <span class="num">150<?php //echo $this->user_m->today_customer(); ?></span></small></p>
-						</div>
-					</div>
-					<div class="col-md-4 icon">
-						<i class="fa fa-user fa-3x"></i>
-					</div>
-				</div>
-			</div>
-		</div>
-
+		
+		
 	</div>
 
 

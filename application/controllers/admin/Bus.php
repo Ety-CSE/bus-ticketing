@@ -14,7 +14,7 @@ class Bus extends Admin_Controller
     // $this->load->model('media_m');
     $this->user_m->access_permission('1');
 
-    $this->session->set_userdata('upload_dir', $this->uri->segment(2));
+    // $this->session->set_userdata('upload_dir', $this->uri->segment(2));
 
   }
 

@@ -852,48 +852,48 @@
     });
 
     (function () {
-      var s = '<?php echo count($seats);?>';
-      var booked_seat;
-      if( s != 1){
-       booked_seat = [<?php echo '"'.implode('","', $seats).'"' ?>];//'';  // I will invoke myself
-      }else{
-        booked_seat = '';
-      }
-      // console.log(booked_seat);
-      for(var x=0; x < booked_seat.length; x++){
-        $("#"+booked_seat[x]).addClass('booked');
-      }
-    })();
+        var s = '<?php echo count($seats);?>';
+        var booked_seat;
+        if( s != 1){
+        booked_seat = [<?php echo '"'.implode('","', $seats).'"' ?>];//'';  // I will invoke myself
+        }else{
+          booked_seat = '';
+        }
+        // console.log(booked_seat);
+        for(var x=0; x < booked_seat.length; x++){
+          $("#"+booked_seat[x]).addClass('booked');
+        }
+      })();
 
-    var seats = [];
-    $('.st2').click(function(){
-      $(this).toggleClass('select');
-      if($.inArray($(this).attr('id'), seats ) != -1){
-          const index = seats.indexOf($(this).attr('id'));
-          if (index > -1) {
-            seats.splice(index, 1);
-          }
-      }else{
-        seats.push($(this).attr('id'));
-      }
+      var seats = [];
+      $('.st2').click(function(){
+        $(this).toggleClass('select');
+        if($.inArray($(this).attr('id'), seats ) != -1){
+            const index = seats.indexOf($(this).attr('id'));
+            if (index > -1) {
+              seats.splice(index, 1);
+            }
+        }else{
+          seats.push($(this).attr('id'));
+        }
 
-      var booking = '';
-      var fare = '<?php echo $coach->fare;?>';
-      var type = '<?php echo $this->trip_m->category($coach->type);?>';
-      var i;
-      for (i = 0; i < seats.length; ++i) {
-        booking += '<tr class="'+seats[i]+'">';
-        booking += '<td>'+seats[i]+'</td>';
-        booking += '<td class="fare">'+fare+' BDT</td>';
-        booking += '<td>'+type+'</td>';
-        booking += '</tr>';
-      }
-      $('#total').val(fare*seats.length);
-      $('.seat_no').val(seats);
-      $('.total').html(fare*seats.length);
-      $('#seats').html(booking);
+        var booking = '';
+        var fare = '<?php echo $coach->fare;?>';
+        var type = '<?php echo $this->trip_m->category($coach->type);?>';
+        var i;
+        for (i = 0; i < seats.length; ++i) {
+          booking += '<tr class="'+seats[i]+'">';
+          booking += '<td>'+seats[i]+'</td>';
+          booking += '<td class="fare">'+fare+' BDT</td>';
+          booking += '<td>'+type+'</td>';
+          booking += '</tr>';
+        }
+        $('#total').val(fare*seats.length);
+        $('.seat_no').val(seats);
+        $('.total').html(fare*seats.length);
+        $('#seats').html(booking);
 
-    console.log(seats);
+      console.log(seats);
     });
 
 
