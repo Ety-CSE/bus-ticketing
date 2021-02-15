@@ -16,6 +16,6 @@
     <script src="https://cdn.tiny.cloud/1/67626vd0gys1quwsp5n5u8xy1w5wcu6cynfns37bm7a3erf1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
     
-    <title>Rent a Car Finder</title>
+    <title>Bus Ticketing</title>
   </head>
   <body>

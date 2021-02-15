@@ -12,6 +12,6 @@
     <link rel="stylesheet" href="<?php echo site_url('css/animate.min.css'); ?>" />
     <script src="<?php echo site_url('js/jquery-3.5.1.min.js');?>"></script>
     
-    <title>Rent a Car Finder</title>
+    <title>Bus Ticketing</title>
   </head>
   <body>
