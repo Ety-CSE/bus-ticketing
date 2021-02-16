@@ -288,6 +288,19 @@ return $coach;
 // dump($co);
 }
 
+// bus by Coach id
+public function get_coach_bus($id=NULL){
+  $this->db->where('id', $id);
+  $parent = $this->db->get('coach');
+  $co = $parent->row();
+  
+  
+    $coach = $this::bus_by_id($co->bus_id).' '.$co->no;
+  // }
+  return $coach;
+  // dump($co);
+  }
+
 // bus DW
 public function get_coach_route($id=NULL){
   $this->db->where('route', $id);

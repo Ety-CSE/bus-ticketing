@@ -154,7 +154,7 @@ $('#route_id').change(function(){
   var url = '<?php echo site_url('admin/trip/get_coach_by_route/');?>'+$(this).val();
   $.get( url, function( data ) {
         $( ".coach" ).html( data );
-        // console.log(data);
+        console.log(data);
       }); 
 });
 
@@ -190,9 +190,9 @@ function add_trip_time()
     phone_no += '<br></div><button onclick="delete_row('+rowno+');" type="button" class="remove badge badge-pill badge-danger">X</button>';
     phone_no += '</div>';
     
+    // console.log(data);
     $(".trip_time").append(phone_no);
   }); 
-  // console.log(rowno);
 }
 
 

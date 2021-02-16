@@ -28,7 +28,7 @@
 				<div class="row no-gutters">
 					<div class="col-md-8">
 						<div class="card-body">
-							<h5 class="card-title"><?php echo $this->user_m->total_expend(); ?> BDT</h5>
+							<h5 class="card-title"><?php echo $this->user_m->total_expend(); ?> <small>BDT</small></h5>
 							<p class="card-text sub-title">Total Invoice</p>
 							<p class="card-text">
 								<small class="text-muted"><b>Due:</b> <span class="num">0 BDT<?php //echo $this->user_m->outofstock_product(); ?></span></small>
@@ -43,7 +43,26 @@
 			</div>
 		</div>
 
-		
+		<div class="col-md-3">
+			<a href="<?php echo site_url(); ?>">
+				<div class="card mb-3 dash">
+					<div class="row no-gutters">
+						<div class="col-md-8">
+							<div class="card-body">
+								<h5 class="card-title"><i class="fa fa-plus"></i></h5>
+								<p class="card-text sub-title">Book Tickete</p>
+								<p class="card-text">
+									<small><i class="fa fa-search"></i> Search Bus</small>
+								</p>
+							</div>
+						</div>
+						<div class="col-md-4 icon">
+							<i class="	fa fa-bus fa-3x"></i>
+						</div>
+					</div>
+				</div>
+			</a>
+		</div>
 		
 	</div>
 

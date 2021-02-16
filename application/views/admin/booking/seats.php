@@ -689,7 +689,7 @@
           </div>
         </div>
         <br>
-        <p><button type="<?php echo $user = ($this->session->userdata['loggedin']) ? 'submit':'button'; ?>" <?php echo $user = ($this->session->userdata['loggedin']) ? '':' data-toggle="modal" data-target="#loginModal"'; ?> class="btn btn-success btn-block" id="order_button">Order</button> <a href="<?php echo site_url();?>" class="btn btn-block btn-outline-warning">Cancel</a></p>
+        <p><button type="<?php echo $user = ($this->session->userdata['loggedin']) ? 'submit':'button'; ?>" <?php echo $user = ($this->session->userdata['loggedin']) ? '':' data-toggle="modal" data-target="#loginModal"'; ?> class="btn btn-success btn-block" id="order_button">Book Now</button> <a href="<?php echo site_url();?>" class="btn btn-block btn-outline-warning">Cancel</a></p>
         <br><?php //dump( $this->session->date); ?>
         <div class="alert alert-success" role="alert">
           <p class="text-center"><i class="fas fa-exclamation-triangle"></i> <b><small>Due to traffic condition, the trip may get canceled.</small></b></p>

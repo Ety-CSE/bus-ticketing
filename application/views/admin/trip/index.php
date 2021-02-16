@@ -17,6 +17,7 @@
           <tr>
             <th>#</th>
             <th>Route</th>
+            <th>Trip</th>
             <th>Bus</th>
             <th>Status</th>
             <th>Edit</th>
@@ -30,7 +31,30 @@
           <tr>
             <td scope="row"><?php echo $no++; ?></td>
             <td><?php echo $this->trip_m->get_route_trip($trip->route_id); ?></td>
-            <td><?php echo $this->trip_m->get_coach_trip($trip->route_id); ?></td>
+            <td>
+              <?php 
+                $trip_time = unserialize($trip->trip_time);
+                
+                echo count($trip_time);
+              ?> Trips
+            </td>
+            <td>
+              <?php
+                $coach_ids = array();
+                 foreach($trip_time as $tt){
+                  if (!in_array($tt[3], $coach_ids)) {
+                    array_push($coach_ids, $tt[3]);;
+                  }
+                }
+              // dump($coach_ids);
+              foreach($coach_ids as $coach){
+                echo '<span class="badge badge-secondary">';
+                echo strtoupper($this->trip_m->get_coach_bus($coach));
+                echo '</span> &nbsp;';
+              }
+
+              ?>
+            </td>
             <td><?php echo $this->trip_m->status($trip->status); ?></td>
             
             <td><?php echo bt_edit('admin/trip/edit/'.$trip->id); ?></td>
